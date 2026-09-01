@@ -167,7 +167,7 @@ body {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     align-items: center;
     justify-content: center;
     z-index: 999;
@@ -263,6 +263,8 @@ footer {
 </div>
 
 
+<!-- HEADER -->
+
 <div class="header">
 
     <h2>💬 Chat</h2>
@@ -272,7 +274,9 @@ footer {
         <button
             class="menu-button"
             onclick="toggleMenu()">
+
             ⋮
+
         </button>
 
         <div
@@ -302,16 +306,24 @@ footer {
 </div>
 
 
+<!-- MAIN -->
+
 <div class="chat-container">
+
+    <!-- LOCKED -->
 
     <div
         class="locked-box"
         id="lockedBox">
 
         🔒 Chat Locked
+        <br>
+        <small>Use Word Sensitive to unlock</small>
 
     </div>
 
+
+    <!-- PASSWORD -->
 
     <div id="passwordBox">
 
@@ -334,6 +346,8 @@ footer {
 
     </div>
 
+
+    <!-- CHAT -->
 
     <div id="chatArea">
 
@@ -392,7 +406,9 @@ import {
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* FIREBASE CONFIG */
+/* ==========================================
+   FIREBASE
+========================================== */
 
 const firebaseConfig = {
 
@@ -411,35 +427,51 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+
+const db =
+    getFirestore(app);
 
 
-/* USER ID */
+/* ==========================================
+   USER DATA
+========================================== */
 
 let userId =
-    localStorage.getItem("top20_user_id");
+    localStorage.getItem(
+        "top20_user_id"
+    );
+
 
 let username =
-    localStorage.getItem("top20_username");
+    localStorage.getItem(
+        "top20_username"
+    );
 
 
-/* CREATE NEW USER ID */
+/* ==========================================
+   CREATE USER ID
+========================================== */
 
 function createUserId() {
 
-    return "user_" +
+    return (
+        "user_" +
         Date.now() +
         "_" +
         Math.random()
             .toString(36)
-            .substring(2, 10);
+            .substring(2, 10)
+    );
 
 }
 
 
-/* SHOW USERNAME POPUP */
+/* ==========================================
+   USERNAME POPUP
+========================================== */
 
 function showUsernameBox() {
 
@@ -450,7 +482,9 @@ function showUsernameBox() {
 }
 
 
-/* SAVE USERNAME */
+/* ==========================================
+   SAVE USERNAME
+========================================== */
 
 window.saveUsername = async function () {
 
@@ -459,13 +493,16 @@ window.saveUsername = async function () {
             "usernameInput"
         );
 
+
     const newUsername =
         input.value.trim();
 
 
     if (newUsername === "") {
 
-        alert("Please enter a username.");
+        alert(
+            "Please enter a username."
+        );
 
         return;
 
@@ -474,18 +511,23 @@ window.saveUsername = async function () {
 
     if (newUsername.length < 2) {
 
-        alert("Username must be at least 2 characters.");
+        alert(
+            "Username must be at least 2 characters."
+        );
 
         return;
 
     }
 
 
-    /* NEW ID WHEN USERNAME IS CHANGED */
+    /* Create NEW identity */
 
-    userId = createUserId();
+    userId =
+        createUserId();
 
-    username = newUsername;
+
+    username =
+        newUsername;
 
 
     localStorage.setItem(
@@ -493,25 +535,30 @@ window.saveUsername = async function () {
         userId
     );
 
+
     localStorage.setItem(
         "top20_username",
         username
     );
 
 
-    /* SAVE USER */
+    /* Save user to Firestore */
 
     try {
 
         await addDoc(
-            collection(db, "users"),
+            collection(
+                db,
+                "users"
+            ),
             {
 
                 userId: userId,
 
                 username: username,
 
-                createdAt: serverTimestamp()
+                createdAt:
+                    serverTimestamp()
 
             }
         );
@@ -526,44 +573,36 @@ window.saveUsername = async function () {
     }
 
 
+    /* Close username popup */
+
     document.getElementById(
         "usernameBox"
     ).style.display = "none";
 
 
-    document.getElementById(
-        "lockedBox"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "chatArea"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "messageInput"
-    ).focus();
+    /*
+       IMPORTANT:
+       Chat stays LOCKED.
+       Username does NOT unlock chat.
+    */
 
 };
 
 
-/* EXISTING USER */
+/* ==========================================
+   FIRST VISIT
+========================================== */
 
-if (userId && username) {
-
-    document.getElementById(
-        "lockedBox"
-    ).style.display = "none";
-
-} else {
+if (!userId || !username) {
 
     showUsernameBox();
 
 }
 
 
-/* CHANGE USERNAME */
+/* ==========================================
+   CHANGE USERNAME
+========================================== */
 
 window.changeUsername = function () {
 
@@ -582,7 +621,9 @@ window.changeUsername = function () {
 };
 
 
-/* MENU */
+/* ==========================================
+   MENU
+========================================== */
 
 window.toggleMenu = function () {
 
@@ -592,7 +633,9 @@ window.toggleMenu = function () {
         );
 
 
-    if (menu.style.display === "block") {
+    if (
+        menu.style.display === "block"
+    ) {
 
         menu.style.display = "none";
 
@@ -605,7 +648,9 @@ window.toggleMenu = function () {
 };
 
 
-/* LETTER SENSITIVE */
+/* ==========================================
+   LETTER SENSITIVE
+========================================== */
 
 window.letterSensitive = function () {
 
@@ -615,7 +660,9 @@ window.letterSensitive = function () {
 };
 
 
-/* EMOJI SENSITIVE */
+/* ==========================================
+   EMOJI SENSITIVE
+========================================== */
 
 window.emojiSensitive = function () {
 
@@ -625,7 +672,9 @@ window.emojiSensitive = function () {
 };
 
 
-/* WORD SENSITIVE */
+/* ==========================================
+   WORD SENSITIVE
+========================================== */
 
 window.wordSensitive = function () {
 
@@ -651,7 +700,9 @@ window.wordSensitive = function () {
 };
 
 
-/* UNLOCK */
+/* ==========================================
+   UNLOCK
+========================================== */
 
 window.unlockChat = function () {
 
@@ -661,7 +712,9 @@ window.unlockChat = function () {
         ).value;
 
 
-    if (password === "Varuu@1234") {
+    if (
+        password === "Varuu@1234"
+    ) {
 
         document.getElementById(
             "passwordBox"
@@ -693,7 +746,9 @@ window.unlockChat = function () {
 };
 
 
-/* SEND MESSAGE */
+/* ==========================================
+   SEND MESSAGE
+========================================== */
 
 window.sendMessage = async function () {
 
@@ -717,7 +772,7 @@ window.sendMessage = async function () {
     if (!userId || !username) {
 
         alert(
-            "Please enter your username first."
+            "Please enter username first."
         );
 
         return;
@@ -728,7 +783,10 @@ window.sendMessage = async function () {
     try {
 
         await addDoc(
-            collection(db, "messages"),
+            collection(
+                db,
+                "messages"
+            ),
             {
 
                 senderId: userId,
@@ -737,7 +795,8 @@ window.sendMessage = async function () {
 
                 message: message,
 
-                createdAt: serverTimestamp()
+                createdAt:
+                    serverTimestamp()
 
             }
         );
@@ -765,18 +824,24 @@ window.sendMessage = async function () {
 };
 
 
-/* REAL-TIME MESSAGES */
+/* ==========================================
+   REAL-TIME CHAT
+========================================== */
 
-const messagesQuery = query(
+const messagesQuery =
+    query(
 
-    collection(db, "messages"),
+        collection(
+            db,
+            "messages"
+        ),
 
-    orderBy(
-        "createdAt",
-        "asc"
-    )
+        orderBy(
+            "createdAt",
+            "asc"
+        )
 
-);
+    );
 
 
 onSnapshot(
@@ -860,26 +925,18 @@ onSnapshot(
     (error) => {
 
         console.error(
-            "Read error:",
+            "Firestore read error:",
             error
         );
-
-
-        const chat =
-            document.getElementById(
-                "chatWindow"
-            );
-
-
-        chat.innerHTML =
-            '<div class="chat-message">❌ Unable to load messages.</div>';
 
     }
 
 );
 
 
-/* ENTER KEY */
+/* ==========================================
+   ENTER KEY
+========================================== */
 
 document
     .getElementById(
@@ -889,7 +946,9 @@ document
         "keydown",
         function (event) {
 
-            if (event.key === "Enter") {
+            if (
+                event.key === "Enter"
+            ) {
 
                 window.sendMessage();
 
@@ -901,5 +960,6 @@ document
 </script>
 
 </body>
+
 </html>
 ```
