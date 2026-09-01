@@ -5,8 +5,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top 20 Games</title>
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #1e293b;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 38px;
+        }
+
+        header p {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 17px;
+        }
+
+        main {
+            width: 92%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        main > h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+
+        .games {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .game-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 18px;
+            padding: 22px;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-image {
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0f172a;
+            border-radius: 14px;
+            font-size: 60px;
+            margin-bottom: 18px;
+        }
+
+        .game-card h3 {
+            margin: 10px 0 18px;
+            font-size: 20px;
+        }
+
+        .play-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 9px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .play-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Aim Master */
+
+        #aimGame {
+            display: none;
+            margin-top: 35px;
+            padding: 25px;
+            background: #1e293b;
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        #aimGame h2 {
+            margin-top: 0;
+        }
+
+        #passwordBox input {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 230px;
+        }
+
+        #chatBox {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .chat-window {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 15px;
+            min-height: 180px;
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .chat-message {
+            background: #334155;
+            padding: 10px 13px;
+            border-radius: 9px;
+            margin: 8px 0;
+        }
+
+        #chatInput {
+            width: 65%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        #sendBtn {
+            padding: 12px 18px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 900px) {
+            .games {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .games {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
 </head>
+
 
 <body>
 
@@ -14,6 +196,7 @@
     <h1>🎮 TOP 20 GAMES</h1>
     <p>Play. Explore. Have Fun.</p>
 </header>
+
 
 <main>
 
@@ -25,197 +208,263 @@
         <div class="game-card">
             <div class="game-image">🔥</div>
             <h3>Free Fire</h3>
-            <button onclick="playGame('Free Fire')">PLAY NOW</button>
+            <a class="play-btn" href="game1.html">PLAY NOW</a>
         </div>
 
         <!-- 2 -->
         <div class="game-card">
-            <div class="game-image">🔫</div>
-            <h3>BGMI</h3>
-            <button onclick="playGame('BGMI')">PLAY NOW</button>
+            <div class="game-image">🏎️</div>
+            <h3>Asphalt 9</h3>
+            <a class="play-btn" href="game2.html">PLAY NOW</a>
         </div>
 
         <!-- 3 -->
         <div class="game-card">
-            <div class="game-image">🏎️</div>
-            <h3>Asphalt 9</h3>
-            <button onclick="playGame('Asphalt 9')">PLAY NOW</button>
+            <div class="game-image">⚽</div>
+            <h3>FC Mobile</h3>
+            <a class="play-btn" href="game3.html">PLAY NOW</a>
         </div>
 
         <!-- 4 -->
         <div class="game-card">
-            <div class="game-image">🧱</div>
-            <h3>Minecraft</h3>
-            <button onclick="playGame('Minecraft')">PLAY NOW</button>
+            <div class="game-image">🧩</div>
+            <h3>Block Puzzle</h3>
+            <a class="play-btn" href="game4.html">PLAY NOW</a>
         </div>
 
         <!-- 5 -->
         <div class="game-card">
-            <div class="game-image">⚽</div>
-            <h3>EA Sports FC</h3>
-            <button onclick="playGame('EA Sports FC')">PLAY NOW</button>
+            <div class="game-image">🚀</div>
+            <h3>Space Fighter</h3>
+            <a class="play-btn" href="game5.html">PLAY NOW</a>
         </div>
 
         <!-- 6 -->
         <div class="game-card">
-            <div class="game-image">🚗</div>
-            <h3>Rocket League</h3>
-            <button onclick="playGame('Rocket League')">PLAY NOW</button>
+            <div class="game-image">🏆</div>
+            <h3>Temple Run</h3>
+            <a class="play-btn" href="game6.html">PLAY NOW</a>
         </div>
 
         <!-- 7 -->
         <div class="game-card">
-            <div class="game-image">🏁</div>
-            <h3>Need for Speed</h3>
-            <button onclick="playGame('Need for Speed')">PLAY NOW</button>
+            <div class="game-image">🔫</div>
+            <h3>BGMI</h3>
+            <a class="play-btn" href="game7.html">PLAY NOW</a>
         </div>
 
         <!-- 8 -->
         <div class="game-card">
             <div class="game-image">🚓</div>
             <h3>GTA V</h3>
-            <button onclick="playGame('GTA V')">PLAY NOW</button>
+            <a class="play-btn" href="game8.html">PLAY NOW</a>
         </div>
 
         <!-- 9 -->
         <div class="game-card">
             <div class="game-image">🧟</div>
             <h3>Zombie Hunter</h3>
-            <button onclick="playGame('Zombie Hunter')">PLAY NOW</button>
+            <a class="play-btn" href="game9.html">PLAY NOW</a>
         </div>
 
         <!-- 10 -->
         <div class="game-card">
             <div class="game-image">🎯</div>
             <h3>Call of Duty</h3>
-            <button onclick="playGame('Call of Duty')">PLAY NOW</button>
+            <a class="play-btn" href="game10.html">PLAY NOW</a>
         </div>
 
         <!-- 11 -->
         <div class="game-card">
             <div class="game-image">🏃</div>
             <h3>Subway Surfers</h3>
-            <button onclick="playGame('Subway Surfers')">PLAY NOW</button>
+            <a class="play-btn" href="game11.html">PLAY NOW</a>
         </div>
 
         <!-- 12 -->
         <div class="game-card">
             <div class="game-image">🦸</div>
             <h3>Marvel Rivals</h3>
-            <button onclick="playGame('Marvel Rivals')">PLAY NOW</button>
+            <a class="play-btn" href="game12.html">PLAY NOW</a>
         </div>
 
-        <!-- 13 - Hidden Special Game -->
+        <!-- 13 - AIM MASTER -->
         <div class="game-card">
             <div class="game-image">🎯</div>
             <h3>Aim Master</h3>
-            <button onclick="startAimMaster()">PLAY NOW</button>
+            <button class="play-btn" onclick="startAimMaster()">PLAY NOW</button>
         </div>
 
         <!-- 14 -->
         <div class="game-card">
             <div class="game-image">👽</div>
             <h3>Among Us</h3>
-            <button onclick="playGame('Among Us')">PLAY NOW</button>
+            <a class="play-btn" href="game14.html">PLAY NOW</a>
         </div>
 
         <!-- 15 -->
         <div class="game-card">
             <div class="game-image">👑</div>
             <h3>Clash Royale</h3>
-            <button onclick="playGame('Clash Royale')">PLAY NOW</button>
+            <a class="play-btn" href="game15.html">PLAY NOW</a>
         </div>
 
         <!-- 16 -->
         <div class="game-card">
             <div class="game-image">⚔️</div>
             <h3>Shadow Fight</h3>
-            <button onclick="playGame('Shadow Fight')">PLAY NOW</button>
+            <a class="play-btn" href="game16.html">PLAY NOW</a>
         </div>
 
         <!-- 17 -->
         <div class="game-card">
             <div class="game-image">🏰</div>
             <h3>Clash of Clans</h3>
-            <button onclick="playGame('Clash of Clans')">PLAY NOW</button>
+            <a class="play-btn" href="game17.html">PLAY NOW</a>
         </div>
 
         <!-- 18 -->
         <div class="game-card">
-            <div class="game-image">🚀</div>
-            <h3>Space Adventure</h3>
-            <button onclick="playGame('Space Adventure')">PLAY NOW</button>
+            <div class="game-image">🧠</div>
+            <h3>Brain Puzzle</h3>
+            <a class="play-btn" href="game18.html">PLAY NOW</a>
         </div>
 
         <!-- 19 -->
         <div class="game-card">
-            <div class="game-image">🧠</div>
-            <h3>Brain Puzzle</h3>
-            <button onclick="playGame('Brain Puzzle')">PLAY NOW</button>
+            <div class="game-image">🌴</div>
+            <h3>Island Survival</h3>
+            <a class="play-btn" href="game19.html">PLAY NOW</a>
         </div>
 
         <!-- 20 -->
         <div class="game-card">
-            <div class="game-image">🏝️</div>
-            <h3>Island Survival</h3>
-            <button onclick="playGame('Island Survival')">PLAY NOW</button>
+            <div class="game-image">🏁</div>
+            <h3>Real Racing</h3>
+            <a class="play-btn" href="game20.html">PLAY NOW</a>
+        </div>
+
+    </div>
+
+
+    <!-- AIM MASTER LOGIN + CHAT -->
+
+    <div id="aimGame">
+
+        <h2>🎯 Aim Master</h2>
+
+        <div id="passwordBox">
+
+            <p>Enter password to continue</p>
+
+            <input
+                type="password"
+                id="passwordInput"
+                placeholder="Password"
+            >
+
+            <br><br>
+
+            <button class="play-btn" onclick="checkPassword()">
+                ENTER
+            </button>
+
+        </div>
+
+
+        <div id="chatBox">
+
+            <div class="chat-window" id="chatWindow">
+
+                <div class="chat-message">
+                    🎯 Welcome to Aim Master!
+                </div>
+
+            </div>
+
+            <input
+                type="text"
+                id="chatInput"
+                placeholder="Type your message..."
+            >
+
+            <button id="sendBtn" onclick="sendMessage()">
+                SEND
+            </button>
+
         </div>
 
     </div>
 
 </main>
 
+
 <footer>
-    <p>🎮 Top 20 Games | My Gaming Website Project</p>
+    🎮 Top 20 Games | My Gaming Website Project
 </footer>
 
 
 <script>
 
-function playGame(gameName) {
+function startAimMaster() {
 
-    alert(
-        "🎮 " + gameName +
-        "\n\nGame selected successfully!" +
-        "\n\nThis is a demo gaming website."
-    );
+    document.getElementById("aimGame").style.display = "block";
 
+    document.getElementById("aimGame").scrollIntoView({
+        behavior: "smooth"
+    });
+
+    document.getElementById("passwordInput").focus();
 }
 
 
-function startAimMaster() {
+function checkPassword() {
 
-    let score = 0;
+    const password =
+        document.getElementById("passwordInput").value;
 
-    alert("🎯 AIM MASTER\n\nGet ready!");
+    if (password === "patil@1234") {
 
-    for (let i = 0; i < 5; i++) {
+        document.getElementById("passwordBox").style.display = "none";
 
-        let answer = prompt(
-            "🎯 AIM MASTER\n\n" +
-            "Round " + (i + 1) +
-            "\n\nType HIT and press OK!"
-        );
+        document.getElementById("chatBox").style.display = "block";
 
-        if (answer && answer.toUpperCase() === "HIT") {
+    } else {
 
-            score++;
-
-            alert("🎯 HIT! +1 point");
-
-        } else {
-
-            alert("❌ Miss!");
-
-        }
+        alert("❌ Incorrect password");
 
     }
+}
 
-    alert(
-        "🏆 GAME OVER!\n\n" +
-        "Your Score: " + score + " / 5"
-    );
 
+function sendMessage() {
+
+    const input =
+        document.getElementById("chatInput");
+
+    const message =
+        input.value.trim();
+
+    if (message === "") {
+        return;
+    }
+
+    const chat =
+        document.getElementById("chatWindow");
+
+    const newMessage =
+        document.createElement("div");
+
+    newMessage.className = "chat-message";
+
+    newMessage.textContent =
+        "👤 You: " + message;
+
+    chat.appendChild(newMessage);
+
+    input.value = "";
+
+    chat.scrollTop = chat.scrollHeight;
 }
 
 </script>
