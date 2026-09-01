@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +8,7 @@
 <title>Chat</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -169,6 +171,7 @@ footer {
 }
 
 @media (max-width: 500px) {
+
     .input-area {
         flex-direction: column;
     }
@@ -186,7 +189,9 @@ footer {
         width: 100%;
         margin-left: 0;
     }
+
 }
+
 </style>
 </head>
 
@@ -316,42 +321,98 @@ footer {
 </footer>
 
 
-<script>
+<script type="module">
 
-function toggleMenu() {
+/* ==============================
+   FIREBASE
+============================== */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyCpbvdIc6-97RhFZZHO188ZaE_DeMia7M",
+
+    authDomain: "top-20-games.firebaseapp.com",
+
+    projectId: "top-20-games",
+
+    storageBucket: "top-20-games.firebasestorage.app",
+
+    messagingSenderId: "635285760659",
+
+    appId: "1:635285760659:web:88eeb84967029ef2017b66"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* ==============================
+   MENU
+============================== */
+
+window.toggleMenu = function () {
 
     const menu =
         document.getElementById("menuBox");
 
     if (menu.style.display === "block") {
+
         menu.style.display = "none";
+
     } else {
+
         menu.style.display = "block";
+
     }
-}
+
+};
 
 
-/* 1. Letter Sensitive → Home */
+/* ==============================
+   LETTER SENSITIVE
+============================== */
 
-function letterSensitive() {
-
-    window.location.href = "index.html";
-
-}
-
-
-/* 2. Emoji Sensitive → Home */
-
-function emojiSensitive() {
+window.letterSensitive = function () {
 
     window.location.href = "index.html";
 
-}
+};
 
 
-/* 3. Word Sensitive → Password */
+/* ==============================
+   EMOJI SENSITIVE
+============================== */
 
-function wordSensitive() {
+window.emojiSensitive = function () {
+
+    window.location.href = "index.html";
+
+};
+
+
+/* ==============================
+   WORD SENSITIVE
+============================== */
+
+window.wordSensitive = function () {
 
     document.getElementById("menuBox").style.display = "none";
 
@@ -361,12 +422,14 @@ function wordSensitive() {
 
     document.getElementById("passwordInput").focus();
 
-}
+};
 
 
-/* Word Sensitive Password */
+/* ==============================
+   UNLOCK CHAT
+============================== */
 
-function unlockChat() {
+window.unlockChat = function () {
 
     const password =
         document.getElementById("passwordInput").value;
@@ -387,12 +450,14 @@ function unlockChat() {
 
     }
 
-}
+};
 
 
-/* Send message */
+/* ==============================
+   SEND MESSAGE
+============================== */
 
-function sendMessage() {
+window.sendMessage = async function () {
 
     const input =
         document.getElementById("messageInput");
@@ -404,50 +469,141 @@ function sendMessage() {
         return;
     }
 
-    const chat =
-        document.getElementById("chatWindow");
+    try {
 
-    const newMessage =
-        document.createElement("div");
+        await addDoc(
+            collection(db, "messages"),
+            {
+                sender: "you",
+                message: message,
+                createdAt: serverTimestamp()
+            }
+        );
 
-    newMessage.className = "chat-message";
+        input.value = "";
 
-    newMessage.textContent =
-        "👤 You: " + message;
+    } catch (error) {
 
-    chat.appendChild(newMessage);
+        console.error(
+            "Firebase error:",
+            error
+        );
 
-    input.value = "";
+        alert(
+            "❌ Message send failed."
+        );
 
-    chat.scrollTop = chat.scrollHeight;
+    }
 
-}
+};
 
 
-/* Enter key sends message */
+/* ==============================
+   REAL-TIME MESSAGES
+============================== */
+
+const messagesQuery = query(
+
+    collection(db, "messages"),
+
+    orderBy(
+        "createdAt",
+        "asc"
+    )
+
+);
+
+
+onSnapshot(
+    messagesQuery,
+
+    (snapshot) => {
+
+        const chat =
+            document.getElementById("chatWindow");
+
+        chat.innerHTML = "";
+
+        snapshot.forEach(
+            (doc) => {
+
+                const data =
+                    doc.data();
+
+                const newMessage =
+                    document.createElement("div");
+
+                newMessage.className =
+                    "chat-message";
+
+                const sender =
+                    data.sender === "you"
+                        ? "👤 You"
+                        : "👤 Friend";
+
+                newMessage.textContent =
+                    sender +
+                    ": " +
+                    (data.message || "");
+
+                chat.appendChild(
+                    newMessage
+                );
+
+            }
+        );
+
+        chat.scrollTop =
+            chat.scrollHeight;
+
+    },
+
+    (error) => {
+
+        console.error(
+            "Firestore error:",
+            error
+        );
+
+    }
+
+);
+
+
+/* ==============================
+   ENTER KEY
+============================== */
 
 document
     .getElementById("messageInput")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+        "keydown",
+        function (event) {
 
-        if (event.key === "Enter") {
-            sendMessage();
+            if (event.key === "Enter") {
+
+                window.sendMessage();
+
+            }
+
         }
+    );
 
-    });
 
+/* ==============================
+   OPEN PAGE
+============================== */
 
-/* 4. Open Page */
-
-function openPage() {
+window.openPage = function () {
 
     document.getElementById("menuBox").style.display = "none";
 
     window.location.href = "about:blank";
 
-}
+};
 
 </script>
 
 </body>
 </html>
+```
