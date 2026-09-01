@@ -3,20 +3,12 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Chat</title>
 
-
 <style>
-
-/* =========================
-   BASIC
-========================= */
 
 * {
     box-sizing: border-box;
@@ -24,72 +16,50 @@ content="width=device-width, initial-scale=1.0">
 
 body {
     margin: 0;
-
     font-family: Arial, sans-serif;
-
     background: #0f172a;
-
     color: white;
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header {
-
     height: 65px;
-
     background: #1e293b;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     padding: 0 18px;
 }
 
 .header h2 {
-
     margin: 0;
-
     font-size: 21px;
 }
 
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 .menu {
-
     position: relative;
 }
 
 .menu-button {
-
     background: transparent;
-
     color: white;
-
     border: none;
-
     font-size: 30px;
-
     cursor: pointer;
 }
 
 .dropdown {
-
     display: none;
 
     position: absolute;
-
     right: 0;
-
     top: 45px;
 
     width: 230px;
@@ -97,7 +67,6 @@ body {
     background: #1e293b;
 
     border: 1px solid #475569;
-
     border-radius: 10px;
 
     overflow: hidden;
@@ -106,15 +75,12 @@ body {
 }
 
 .dropdown button {
-
     width: 100%;
-
     display: block;
 
     padding: 15px;
 
     background: #1e293b;
-
     color: white;
 
     border: none;
@@ -127,31 +93,23 @@ body {
 }
 
 .dropdown button:hover {
-
     background: #334155;
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 .chat-container {
-
     width: 94%;
-
     max-width: 700px;
 
     margin: 25px auto;
 }
 
 
-/* =========================
-   LOCKED BOX
-========================= */
+/* LOCK */
 
 .locked-box {
-
     background: #1e293b;
 
     border-radius: 14px;
@@ -162,12 +120,9 @@ body {
 }
 
 
-/* =========================
-   PASSWORD BOX
-========================= */
+/* PASSWORD BOX */
 
 #passwordBox {
-
     display: none;
 
     background: #1e293b;
@@ -182,11 +137,9 @@ body {
 }
 
 
-/* =========================
-   PASSWORD AREA
-========================= */
+/* PASSWORD WRAPPER */
 
-.password-area {
+.password-wrapper {
 
     position: relative;
 
@@ -206,7 +159,7 @@ body {
 
     height: 50px;
 
-    padding: 12px 52px 12px 14px;
+    padding: 12px 55px 12px 14px;
 
     border: none;
 
@@ -222,9 +175,7 @@ body {
 }
 
 
-/* =========================
-   EYE BUTTON
-========================= */
+/* EYE BUTTON */
 
 #eyeButton {
 
@@ -238,9 +189,9 @@ body {
 
     height: 40px;
 
-    padding: 0;
-
     border: none;
+
+    border-radius: 7px;
 
     background: white;
 
@@ -250,26 +201,17 @@ body {
 
     cursor: pointer;
 
-    border-radius: 7px;
-
     display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    z-index: 20;
-}
-
-#eyeButton:active {
-
-    transform: scale(0.95);
+    padding: 0;
 }
 
 
-/* =========================
-   UNLOCK BUTTON
-========================= */
+/* UNLOCK */
 
 #unlockButton {
 
@@ -285,18 +227,13 @@ body {
 
     font-weight: bold;
 
-    font-size: 15px;
-
     cursor: pointer;
 }
 
 
-/* =========================
-   CHAT
-========================= */
+/* CHAT */
 
 #chatArea {
-
     display: none;
 }
 
@@ -340,9 +277,7 @@ body {
 }
 
 
-/* =========================
-   MESSAGE INPUT
-========================= */
+/* INPUT */
 
 .input-area {
 
@@ -386,9 +321,7 @@ body {
 }
 
 
-/* =========================
-   USERNAME POPUP
-========================= */
+/* USERNAME POPUP */
 
 #usernameBox {
 
@@ -459,9 +392,7 @@ body {
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer {
 
@@ -473,19 +404,15 @@ footer {
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media (max-width: 500px) {
 
     .input-area {
-
         flex-direction: column;
     }
 
     #sendButton {
-
         width: 100%;
     }
 
@@ -499,9 +426,7 @@ footer {
 <body>
 
 
-<!-- =====================================
-     USERNAME POPUP
-===================================== -->
+<!-- USERNAME POPUP -->
 
 <div id="usernameBox">
 
@@ -531,14 +456,11 @@ footer {
 </div>
 
 
-<!-- =====================================
-     HEADER
-===================================== -->
+<!-- HEADER -->
 
 <div class="header">
 
     <h2>💬 Chat</h2>
-
 
     <div class="menu">
 
@@ -550,43 +472,25 @@ footer {
 
         </button>
 
-
         <div
             class="dropdown"
             id="menuBox">
 
-
-            <button
-                onclick="letterSensitive()">
-
+            <button onclick="letterSensitive()">
                 1. Letter Sensitive
-
             </button>
 
-
-            <button
-                onclick="emojiSensitive()">
-
+            <button onclick="emojiSensitive()">
                 2. Emoji Sensitive
-
             </button>
 
-
-            <button
-                onclick="wordSensitive()">
-
+            <button onclick="wordSensitive()">
                 3. Word Sensitive
-
             </button>
 
-
-            <button
-                onclick="changeUsername()">
-
+            <button onclick="changeUsername()">
                 4. Change Username
-
             </button>
-
 
         </div>
 
@@ -595,14 +499,12 @@ footer {
 </div>
 
 
-<!-- =====================================
-     CHAT CONTAINER
-===================================== -->
+<!-- MAIN -->
 
 <div class="chat-container">
 
 
-    <!-- LOCK -->
+    <!-- LOCKED -->
 
     <div
         class="locked-box"
@@ -619,9 +521,7 @@ footer {
     </div>
 
 
-    <!-- =================================
-         PASSWORD
-    ================================== -->
+    <!-- PASSWORD -->
 
     <div id="passwordBox">
 
@@ -630,8 +530,7 @@ footer {
         <p>Enter password</p>
 
 
-        <div class="password-area">
-
+        <div class="password-wrapper">
 
             <input
                 type="password"
@@ -649,7 +548,6 @@ footer {
 
             </button>
 
-
         </div>
 
 
@@ -661,16 +559,12 @@ footer {
 
         </button>
 
-
     </div>
 
 
-    <!-- =================================
-         CHAT AREA
-    ================================== -->
+    <!-- CHAT -->
 
     <div id="chatArea">
-
 
         <div id="currentUser"></div>
 
@@ -680,16 +574,13 @@ footer {
             id="chatWindow">
 
             <div class="chat-message">
-
                 Loading messages...
-
             </div>
 
         </div>
 
 
         <div class="input-area">
-
 
             <input
                 type="text"
@@ -706,9 +597,7 @@ footer {
 
             </button>
 
-
         </div>
-
 
     </div>
 
@@ -716,66 +605,41 @@ footer {
 
 
 <footer>
-
     💬 Chat
-
 </footer>
 
 
 
-<!-- =====================================
-     FIREBASE
-===================================== -->
+<!-- FIREBASE -->
 
 <script type="module">
 
 
-/* =====================================
-   FIREBASE IMPORT
-===================================== */
+/* FIREBASE IMPORT */
 
 import {
-
     initializeApp
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 
 import {
-
     getFirestore,
-
     collection,
-
     addDoc,
-
     getDocs,
-
     query,
-
     where,
-
     orderBy,
-
     onSnapshot,
-
     serverTimestamp
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-
-/* =====================================
-   FIREBASE CONFIG
-===================================== */
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -803,15 +667,11 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
-
 const db =
     getFirestore(app);
 
 
-
-/* =====================================
-   VARIABLES
-===================================== */
+/* VARIABLES */
 
 let userId = null;
 
@@ -820,34 +680,21 @@ let username = null;
 let unsubscribeMessages = null;
 
 
-
-/* =====================================
-   CREATE USER ID
-===================================== */
+/* CREATE USER ID */
 
 function createUserId() {
 
-    return (
-
-        "user_" +
-
+    return "user_" +
         Date.now() +
-
         "_" +
-
         Math.random()
         .toString(36)
-        .substring(2,10)
-
-    );
+        .substring(2,10);
 
 }
 
 
-
-/* =====================================
-   SHOW USERNAME BOX
-===================================== */
+/* USERNAME BOX */
 
 function showUsernameBox() {
 
@@ -855,44 +702,33 @@ function showUsernameBox() {
         "usernameBox"
     ).style.display = "flex";
 
-
     document.getElementById(
         "usernameInput"
     ).value = "";
 
+    setTimeout(function() {
 
-    setTimeout(
-        function() {
+        document.getElementById(
+            "usernameInput"
+        ).focus();
 
-            document.getElementById(
-                "usernameInput"
-            ).focus();
-
-        },
-        100
-    );
+    },100);
 
 }
 
 
-
-/* =====================================
-   SELECT USERNAME
-===================================== */
+/* SELECT USERNAME */
 
 window.selectUsername =
 async function() {
-
 
     const input =
         document.getElementById(
             "usernameInput"
         );
 
-
     const enteredName =
         input.value.trim();
-
 
     if (enteredName === "") {
 
@@ -901,9 +737,7 @@ async function() {
         );
 
         return;
-
     }
-
 
     if (enteredName.length < 2) {
 
@@ -912,85 +746,59 @@ async function() {
         );
 
         return;
-
     }
-
 
     const normalizedName =
         enteredName.toLowerCase();
 
-
     try {
-
-
-        /* SEARCH EXISTING USER */
 
         const userQuery =
             query(
-
                 collection(
                     db,
                     "users"
                 ),
-
                 where(
                     "usernameLower",
                     "==",
                     normalizedName
                 )
-
             );
 
-
-        const userSnapshot =
+        const snapshot =
             await getDocs(
                 userQuery
             );
 
 
-        if (
-            !userSnapshot.empty
-        ) {
-
+        if (!snapshot.empty) {
 
             const existingUser =
-                userSnapshot
-                .docs[0]
-                .data();
-
+                snapshot.docs[0].data();
 
             userId =
                 existingUser.userId;
 
-
             username =
                 existingUser.username;
-
 
         }
 
         else {
 
-
-            /* NEW USER */
-
             userId =
                 createUserId();
-
 
             username =
                 enteredName;
 
-
             await addDoc(
-
                 collection(
                     db,
                     "users"
                 ),
-
                 {
-
                     userId:
                         userId,
 
@@ -1002,9 +810,7 @@ async function() {
 
                     createdAt:
                         serverTimestamp()
-
                 }
-
             );
 
         }
@@ -1019,20 +825,14 @@ async function() {
             "lockedBox"
         ).style.display = "block";
 
-
     }
-
 
     catch(error) {
 
-
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         alert(
-            "❌ Could not set username."
+            "❌ Could not set username. Check Firebase Rules."
         );
 
     }
@@ -1040,20 +840,15 @@ async function() {
 };
 
 
-
-/* =====================================
-   MENU
-===================================== */
+/* MENU */
 
 window.toggleMenu =
 function() {
-
 
     const menu =
         document.getElementById(
             "menuBox"
         );
-
 
     if (
         menu.style.display === "block"
@@ -1072,10 +867,7 @@ function() {
 };
 
 
-
-/* =====================================
-   LETTER
-===================================== */
+/* LETTER */
 
 window.letterSensitive =
 function() {
@@ -1086,10 +878,7 @@ function() {
 };
 
 
-
-/* =====================================
-   EMOJI
-===================================== */
+/* EMOJI */
 
 window.emojiSensitive =
 function() {
@@ -1100,14 +889,10 @@ function() {
 };
 
 
-
-/* =====================================
-   WORD SENSITIVE
-===================================== */
+/* WORD SENSITIVE */
 
 window.wordSensitive =
 function() {
-
 
     document.getElementById(
         "menuBox"
@@ -1150,20 +935,15 @@ function() {
 };
 
 
-
-/* =====================================
-   EYE SHOW / HIDE
-===================================== */
+/* EYE SHOW/HIDE */
 
 window.togglePassword =
 function() {
-
 
     const input =
         document.getElementById(
             "passwordInput"
         );
-
 
     const eye =
         document.getElementById(
@@ -1175,38 +955,27 @@ function() {
         input.type === "password"
     ) {
 
-
         input.type = "text";
 
-
-        eye.textContent =
-            "🙈";
+        eye.textContent = "🙈";
 
     }
 
     else {
 
+        input.type = "password";
 
-        input.type =
-            "password";
-
-
-        eye.textContent =
-            "👁️";
+        eye.textContent = "👁️";
 
     }
 
 };
 
 
-
-/* =====================================
-   UNLOCK CHAT
-===================================== */
+/* UNLOCK */
 
 window.unlockChat =
 function() {
-
 
     const password =
         document.getElementById(
@@ -1214,15 +983,9 @@ function() {
         ).value;
 
 
-    /*
-       PASSWORD:
-       Varad@1234
-    */
-
     if (
         password === "Varad@1234"
     ) {
-
 
         document.getElementById(
             "passwordBox"
@@ -1257,7 +1020,6 @@ function() {
 
     else {
 
-
         alert(
             "❌ Incorrect password"
         );
@@ -1267,13 +1029,9 @@ function() {
 };
 
 
-
-/* =====================================
-   START REAL-TIME CHAT
-===================================== */
+/* START CHAT */
 
 function startChat() {
-
 
     if (
         unsubscribeMessages
@@ -1305,9 +1063,7 @@ function startChat() {
 
             messagesQuery,
 
-
             function(snapshot) {
-
 
                 const chat =
                     document.getElementById(
@@ -1320,7 +1076,6 @@ function startChat() {
 
                 snapshot.forEach(
                     function(doc) {
-
 
                         const data =
                             doc.data();
@@ -1341,7 +1096,6 @@ function startChat() {
                             userId
                         ) {
 
-
                             message.textContent =
                                 "👤 You: " +
                                 (
@@ -1349,11 +1103,9 @@ function startChat() {
                                     ""
                                 );
 
-
                         }
 
                         else {
-
 
                             message.textContent =
                                 "👤 " +
@@ -1383,25 +1135,16 @@ function startChat() {
 
             },
 
-
             function(error) {
 
-
-                console.error(
-                    "Firestore error:",
-                    error
-                );
-
+                console.error(error);
 
                 document.getElementById(
                     "chatWindow"
                 ).innerHTML =
-
-                '<div class="chat-message">' +
-
-                '❌ Could not load messages.' +
-
-                '</div>';
+                    '<div class="chat-message">' +
+                    '❌ Could not load messages.' +
+                    '</div>';
 
             }
 
@@ -1410,38 +1153,28 @@ function startChat() {
 }
 
 
-
-/* =====================================
-   SEND MESSAGE
-===================================== */
+/* SEND MESSAGE */
 
 window.sendMessage =
 async function() {
-
 
     const input =
         document.getElementById(
             "messageInput"
         );
 
-
     const message =
         input.value.trim();
 
 
-    if (
-        message === ""
-    ) {
+    if (message === "") {
 
         return;
 
     }
 
 
-    if (
-        !userId ||
-        !username
-    ) {
+    if (!userId || !username) {
 
         alert(
             "Please select username first."
@@ -1453,7 +1186,6 @@ async function() {
 
 
     try {
-
 
         await addDoc(
 
@@ -1487,15 +1219,9 @@ async function() {
 
     }
 
-
     catch(error) {
 
-
-        console.error(
-            "Send error:",
-            error
-        );
-
+        console.error(error);
 
         alert(
             "❌ Message send failed."
@@ -1506,14 +1232,10 @@ async function() {
 };
 
 
-
-/* =====================================
-   CHANGE USERNAME
-===================================== */
+/* CHANGE USERNAME */
 
 window.changeUsername =
 function() {
-
 
     document.getElementById(
         "menuBox"
@@ -1557,13 +1279,12 @@ function() {
 };
 
 
-
-/* =====================================
-   USERNAME ENTER
-===================================== */
+/* USERNAME ENTER */
 
 document
-.getElementById("usernameInput")
+.getElementById(
+    "usernameInput"
+)
 .addEventListener(
     "keydown",
     function(event) {
@@ -1580,13 +1301,12 @@ document
 );
 
 
-
-/* =====================================
-   PASSWORD ENTER
-===================================== */
+/* PASSWORD ENTER */
 
 document
-.getElementById("passwordInput")
+.getElementById(
+    "passwordInput"
+)
 .addEventListener(
     "keydown",
     function(event) {
@@ -1603,13 +1323,12 @@ document
 );
 
 
-
-/* =====================================
-   MESSAGE ENTER
-===================================== */
+/* MESSAGE ENTER */
 
 document
-.getElementById("messageInput")
+.getElementById(
+    "messageInput"
+)
 .addEventListener(
     "keydown",
     function(event) {
@@ -1626,16 +1345,12 @@ document
 );
 
 
-
-/* =====================================
-   ASK USERNAME EVERY PAGE LOAD
-===================================== */
+/* ASK USERNAME ON PAGE LOAD */
 
 showUsernameBox();
 
 
 </script>
-
 
 </body>
 
