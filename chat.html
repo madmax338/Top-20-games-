@@ -1,1 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+.header {
+    background: #1e293b;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.menu {
+    position: relative;
+}
+
+.menu button {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    width: 190px;
+    background: #1e293b;
+    border: 1px solid #475569;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.dropdown button {
+    width: 100%;
+    padding: 14px;
+    background: #1e293b;
+    color: white;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dropdown button:hover {
+    background: #334155;
+}
+
+.chat-container {
+    width: 94%;
+    max-width: 700px;
+    margin: 30px auto;
+}
+
+.locked-message {
+    text-align: center;
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.chat-window {
+    background: #020617;
+    border-radius: 15px;
+    padding: 18px;
+    min-height: 350px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    background: #334155;
+    padding: 11px 14px;
+    border-radius: 10px;
+    margin: 9px 0;
+}
+
+#chatArea {
+    display: none;
+}
+
+.input-area {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 9px;
+    font-size: 16px;
+}
+
+#sendButton {
+    padding: 13px 20px;
+    border: none;
+    border-radius: 9px;
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#passwordBox {
+    display: none;
+    text-align: center;
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+#passwordInput {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#passwordButton {
+    padding: 12px 18px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none !important;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <h2>💬 Chat</h2>
+
+    <div class="menu">
+
+        <button onclick="toggleMenu()">⋮</button>
+
+        <div class="dropdown" id="menuBox">
+
+            <button onclick="goHome()">
+                1. Letter Sensitive
+            </button>
+
+            <button onclick="goHome()">
+                2. Emoji Sensitive
+            </button>
+
+            <button onclick="wordSensitive()">
+                3. Word Sensitive
+            </button>
+
+            <button onclick="openPage()">
+                4. Open Page
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="chat-container">
+
+    <div class="locked-message" id="lockedMessage">
+        🔒 Chat is locked.<br>
+        Use the ⋮ menu and select Word Sensitive to unlock.
+    </div>
+
+
+    <div id="chatArea">
+
+        <div class="chat-window" id="chatWindow">
+
+            <div class="chat-message">
+                👤 Ravi: Hey!
+            </div>
+
+            <div class="chat-message">
+                👤 Ganesh: Hello bro 👋
+            </div>
+
+            <div class="chat-message">
+                👤 Ravi: What's up?
+            </div>
+
+        </div>
+
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Type a message..."
+            >
+
+            <button id="sendButton" onclick="sendMessage()">
+                SEND
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div id="passwordBox">
+
+        <p>🔐 Enter password</p>
+
+        <input
+            type="password"
+            id="passwordInput"
+            placeholder="Password"
+        >
+
+        <button id="passwordButton" onclick="unlockChat()">
+            UNLOCK
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+    💬 Private Chat Demo
+</footer>
+
+
+<script>
+
+function toggleMenu() {
+
+    const menu = document.getElementById("menuBox");
+
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+
+
+/* 1. Letter Sensitive */
+
+function goHome() {
+
+    window.location.href = "index.html";
+
+}
+
+
+/* 2. Emoji Sensitive */
+/* Same function: directly Home */
+
+
+/* 3. Word Sensitive */
+
+function wordSensitive() {
+
+    document.getElementById("menuBox").style.display = "none";
+
+    document.getElementById("passwordBox").style.display = "block";
+
+    document.getElementById("passwordInput").focus();
+
+}
+
+
+function unlockChat() {
+
+    const password =
+        document.getElementById("passwordInput").value;
+
+    if (password === "patil@1234") {
+
+        document.getElementById("passwordBox").style.display = "none";
+
+        document.getElementById("lockedMessage").style.display = "none";
+
+        document.getElementById("chatArea").style.display = "block";
+
+        document.getElementById("messageInput").focus();
+
+    } else {
+
+        alert("❌ Incorrect password");
+
+    }
+
+}
+
+
+/* 4. Open Page */
+
+function openPage() {
+
+    document.getElementById("menuBox").style.display = "none";
+
+    /*
+      A normal webpage cannot force Chrome itself to close.
+      This attempts to leave the current page.
+    */
+
+    window.location.href = "about:blank";
+
+}
+
+
+/* SEND MESSAGE */
+
+function sendMessage() {
+
+    const input =
+        document.getElementById("messageInput");
+
+    const message =
+        input.value.trim();
+
+    if (message === "") {
+        return;
+    }
+
+    const chat =
+        document.getElementById("chatWindow");
+
+    const newMessage =
+        document.createElement("div");
+
+    newMessage.className = "chat-message";
+
+    newMessage.textContent =
+        "👤 You: " + message;
+
+    chat.appendChild(newMessage);
+
+    input.value = "";
+
+    chat.scrollTop = chat.scrollHeight;
+
+}
+
+
+/* ENTER KEY = SEND */
+
+document.getElementById("messageInput").addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
