@@ -143,18 +143,36 @@ body {
     margin-top: 20px;
 }
 
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 12px auto;
+}
+
 #passwordInput {
-    width: 220px;
-    padding: 13px;
+    width: 100%;
+    padding: 13px 48px 13px 13px;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     outline: none;
 }
 
+#eyeButton {
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    height: 42px;
+    width: 42px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 21px;
+}
+
 #unlockButton {
     padding: 13px 18px;
-    margin-left: 5px;
     border: none;
     border-radius: 8px;
     background: #2563eb;
@@ -217,6 +235,7 @@ footer {
 }
 
 @media (max-width: 500px) {
+
     .input-area {
         flex-direction: column;
     }
@@ -225,14 +244,9 @@ footer {
         width: 100%;
     }
 
-    #passwordInput {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
     #unlockButton {
         width: 100%;
-        margin-left: 0;
+        margin-top: 5px;
     }
 }
 </style>
@@ -315,6 +329,8 @@ footer {
 
 <div class="chat-container">
 
+    <!-- LOCK -->
+
     <div
         class="locked-box"
         id="lockedBox">
@@ -326,16 +342,32 @@ footer {
     </div>
 
 
+    <!-- PASSWORD -->
+
     <div id="passwordBox">
 
         <h3>🔐 Word Sensitive</h3>
 
         <p>Enter password</p>
 
-        <input
-            type="password"
-            id="passwordInput"
-            placeholder="Password">
+        <div class="password-wrapper">
+
+            <input
+                type="password"
+                id="passwordInput"
+                placeholder="Password"
+                autocomplete="off">
+
+            <button
+                id="eyeButton"
+                onclick="togglePassword()"
+                type="button">
+
+                👁️
+
+            </button>
+
+        </div>
 
         <button
             id="unlockButton"
@@ -347,6 +379,8 @@ footer {
 
     </div>
 
+
+    <!-- CHAT -->
 
     <div id="chatArea">
 
@@ -431,9 +465,11 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db =
+    getFirestore(app);
 
 
 /* ==========================================
@@ -441,7 +477,9 @@ const db = getFirestore(app);
 ========================================== */
 
 let userId = null;
+
 let username = null;
+
 let unsubscribeMessages = null;
 
 
@@ -451,18 +489,20 @@ let unsubscribeMessages = null;
 
 function createUserId() {
 
-    return "user_" +
+    return (
+        "user_" +
         Date.now() +
         "_" +
         Math.random()
             .toString(36)
-            .substring(2, 10);
+            .substring(2, 10)
+    );
 
 }
 
 
 /* ==========================================
-   SHOW USERNAME POPUP
+   SHOW USERNAME
 ========================================== */
 
 function showUsernameBox() {
@@ -474,14 +514,6 @@ function showUsernameBox() {
     document.getElementById(
         "usernameInput"
     ).value = "";
-
-    setTimeout(() => {
-
-        document.getElementById(
-            "usernameInput"
-        ).focus();
-
-    }, 100);
 
 }
 
@@ -503,7 +535,9 @@ window.selectUsername = async function () {
 
     if (enteredName === "") {
 
-        alert("Please enter a username.");
+        alert(
+            "Please enter a username."
+        );
 
         return;
 
@@ -528,21 +562,24 @@ window.selectUsername = async function () {
     try {
 
         /*
-          Find an existing user with
-          the same username.
+          Find existing username.
         */
 
-        const userQuery = query(
+        const userQuery =
+            query(
 
-            collection(db, "users"),
+                collection(
+                    db,
+                    "users"
+                ),
 
-            where(
-                "usernameLower",
-                "==",
-                normalizedName
-            )
+                where(
+                    "usernameLower",
+                    "==",
+                    normalizedName
+                )
 
-        );
+            );
 
 
         const userSnapshot =
@@ -553,14 +590,16 @@ window.selectUsername = async function () {
 
             /*
               Existing username:
-              use the SAME userId.
+              use same userId.
             */
 
             const existingUser =
                 userSnapshot.docs[0].data();
 
+
             userId =
                 existingUser.userId;
+
 
             username =
                 existingUser.username;
@@ -568,24 +607,31 @@ window.selectUsername = async function () {
         } else {
 
             /*
-              New username:
-              create a NEW userId.
+              New username.
             */
 
             userId =
                 createUserId();
+
 
             username =
                 enteredName;
 
 
             await addDoc(
-                collection(db, "users"),
+
+                collection(
+                    db,
+                    "users"
+                ),
+
                 {
 
-                    userId: userId,
+                    userId:
+                        userId,
 
-                    username: username,
+                    username:
+                        username,
 
                     usernameLower:
                         normalizedName,
@@ -594,6 +640,7 @@ window.selectUsername = async function () {
                         serverTimestamp()
 
                 }
+
             );
 
         }
@@ -605,8 +652,7 @@ window.selectUsername = async function () {
 
 
         /*
-          IMPORTANT:
-          Username selection does NOT unlock chat.
+          Username does NOT unlock chat.
         */
 
         document.getElementById(
@@ -624,12 +670,6 @@ window.selectUsername = async function () {
         ).style.display = "none";
 
 
-        document.getElementById(
-            "currentUser"
-        ).textContent =
-            "Username: " + username;
-
-
     } catch (error) {
 
         console.error(
@@ -637,8 +677,9 @@ window.selectUsername = async function () {
             error
         );
 
+
         alert(
-            "❌ Could not set username. Check Firebase."
+            "❌ Could not set username."
         );
 
     }
@@ -669,30 +710,6 @@ window.toggleMenu = function () {
         menu.style.display = "block";
 
     }
-
-};
-
-
-/* ==========================================
-   LETTER SENSITIVE
-========================================== */
-
-window.letterSensitive = function () {
-
-    window.location.href =
-        "index.html";
-
-};
-
-
-/* ==========================================
-   EMOJI SENSITIVE
-========================================== */
-
-window.emojiSensitive = function () {
-
-    window.location.href =
-        "index.html";
 
 };
 
@@ -729,7 +746,53 @@ window.wordSensitive = function () {
 
     document.getElementById(
         "passwordInput"
+    ).type = "password";
+
+
+    document.getElementById(
+        "eyeButton"
+    ).textContent = "👁️";
+
+
+    document.getElementById(
+        "passwordInput"
     ).focus();
+
+};
+
+
+/* ==========================================
+   SHOW / HIDE PASSWORD
+========================================== */
+
+window.togglePassword = function () {
+
+    const input =
+        document.getElementById(
+            "passwordInput"
+        );
+
+    const eye =
+        document.getElementById(
+            "eyeButton"
+        );
+
+
+    if (
+        input.type === "password"
+    ) {
+
+        input.type = "text";
+
+        eye.textContent = "🙈";
+
+    } else {
+
+        input.type = "password";
+
+        eye.textContent = "👁️";
+
+    }
 
 };
 
@@ -745,6 +808,11 @@ window.unlockChat = function () {
             "passwordInput"
         ).value;
 
+
+    /*
+      NEW PASSWORD:
+      Varad@1234
+    */
 
     if (
         password === "Varad@1234"
@@ -768,15 +836,16 @@ window.unlockChat = function () {
         document.getElementById(
             "currentUser"
         ).textContent =
-            "Logged in as: " + username;
+            "Logged in as: " +
+            username;
+
+
+        startChat();
 
 
         document.getElementById(
             "messageInput"
         ).focus();
-
-
-        startChat();
 
 
     } else {
@@ -803,16 +872,36 @@ function startChat() {
     }
 
 
-    const messagesQuery = query(
+    /*
+      IMPORTANT:
+      Only messages belonging to
+      the current username/userId
+      are loaded.
 
-        collection(db, "messages"),
+      For a simple one-to-one style demo,
+      messages are linked by userId.
+    */
 
-        orderBy(
-            "createdAt",
-            "asc"
-        )
+    const messagesQuery =
+        query(
 
-    );
+            collection(
+                db,
+                "messages"
+            ),
+
+            where(
+                "ownerId",
+                "==",
+                userId
+            ),
+
+            orderBy(
+                "createdAt",
+                "asc"
+            )
+
+        );
 
 
     unsubscribeMessages =
@@ -852,8 +941,8 @@ function startChat() {
 
 
                         if (
-                            data.senderId &&
-                            data.senderId === userId
+                            data.senderId ===
+                            userId
                         ) {
 
                             senderName =
@@ -885,6 +974,7 @@ function startChat() {
                         );
 
                     }
+
                 );
 
 
@@ -901,14 +991,10 @@ function startChat() {
                 );
 
 
-                const chat =
-                    document.getElementById(
-                        "chatWindow"
-                    );
-
-
-                chat.innerHTML =
-                    '<div class="chat-message">❌ Unable to load messages.</div>';
+                document.getElementById(
+                    "chatWindow"
+                ).innerHTML =
+                    '<div class="chat-message">❌ Could not load messages.</div>';
 
             }
 
@@ -943,7 +1029,7 @@ window.sendMessage = async function () {
     if (!userId || !username) {
 
         alert(
-            "Please enter your username first."
+            "Please enter username first."
         );
 
         return;
@@ -954,22 +1040,36 @@ window.sendMessage = async function () {
     try {
 
         await addDoc(
+
             collection(
                 db,
                 "messages"
             ),
+
             {
 
-                senderId: userId,
+                /*
+                  ownerId groups the
+                  messages by username.
+                */
 
-                senderName: username,
+                ownerId:
+                    userId,
 
-                message: message,
+                senderId:
+                    userId,
+
+                senderName:
+                    username,
+
+                message:
+                    message,
 
                 createdAt:
                     serverTimestamp()
 
             }
+
         );
 
 
@@ -1006,10 +1106,6 @@ window.changeUsername = function () {
     ).style.display = "none";
 
 
-    /*
-      Stop current real-time listener.
-    */
-
     if (unsubscribeMessages) {
 
         unsubscribeMessages();
@@ -1018,10 +1114,6 @@ window.changeUsername = function () {
 
     }
 
-
-    /*
-      Lock chat again.
-    */
 
     document.getElementById(
         "chatArea"
@@ -1038,9 +1130,10 @@ window.changeUsername = function () {
     ).style.display = "block";
 
 
-    /*
-      Ask for username again.
-    */
+    userId = null;
+
+    username = null;
+
 
     showUsernameBox();
 
@@ -1048,31 +1141,27 @@ window.changeUsername = function () {
 
 
 /* ==========================================
-   ENTER KEY - MESSAGE
+   OTHER MENU OPTIONS
 ========================================== */
 
-document
-    .getElementById(
-        "messageInput"
-    )
-    .addEventListener(
-        "keydown",
-        function (event) {
+window.letterSensitive = function () {
 
-            if (
-                event.key === "Enter"
-            ) {
+    window.location.href =
+        "index.html";
 
-                window.sendMessage();
+};
 
-            }
 
-        }
-    );
+window.emojiSensitive = function () {
+
+    window.location.href =
+        "index.html";
+
+};
 
 
 /* ==========================================
-   ENTER KEY - USERNAME
+   ENTER KEY
 ========================================== */
 
 document
@@ -1095,20 +1184,49 @@ document
     );
 
 
+document
+    .getElementById(
+        "passwordInput"
+    )
+    .addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                window.unlockChat();
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "messageInput"
+    )
+    .addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                window.sendMessage();
+
+            }
+
+        }
+    );
+
+
 /* ==========================================
-   PAGE OPEN
+   EVERY PAGE OPEN ASKS USERNAME
 ========================================== */
-
-/*
-   Username is intentionally NOT stored
-   in localStorage.
-
-   Therefore every fresh page load asks
-   for a username again.
-
-   If the same username is entered,
-   Firebase finds the existing userId.
-*/
 
 showUsernameBox();
 
