@@ -5,9 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Chat</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -19,12 +21,17 @@ body {
     color: white;
 }
 
+
+/* ================= HEADER ================= */
+
 .header {
     height: 65px;
     background: #1e293b;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 18px;
 }
 
@@ -32,6 +39,9 @@ body {
     margin: 0;
     font-size: 21px;
 }
+
+
+/* ================= MENU ================= */
 
 .menu {
     position: relative;
@@ -41,33 +51,52 @@ body {
     background: transparent;
     color: white;
     border: none;
+
     font-size: 30px;
+
     cursor: pointer;
+
     padding: 5px;
 }
 
 .dropdown {
     display: none;
+
     position: absolute;
+
     right: 0;
     top: 45px;
-    width: 220px;
+
+    width: 230px;
+
     background: #1e293b;
+
     border: 1px solid #475569;
+
     border-radius: 10px;
+
     overflow: hidden;
+
     z-index: 100;
 }
 
 .dropdown button {
     display: block;
+
     width: 100%;
+
     padding: 15px;
+
     background: #1e293b;
+
     color: white;
+
     border: none;
+
     text-align: left;
+
     font-size: 15px;
+
     cursor: pointer;
 }
 
@@ -75,18 +104,32 @@ body {
     background: #334155;
 }
 
+
+/* ================= CONTAINER ================= */
+
 .chat-container {
     width: 94%;
+
     max-width: 700px;
+
     margin: 25px auto;
 }
 
+
+/* ================= LOCK ================= */
+
 .locked-box {
     background: #1e293b;
+
     border-radius: 14px;
-    padding: 18px;
+
+    padding: 20px;
+
     text-align: center;
 }
+
+
+/* ================= CHAT ================= */
 
 #chatArea {
     display: none;
@@ -94,145 +137,271 @@ body {
 
 .chat-window {
     background: #020617;
+
     border-radius: 14px;
+
     padding: 16px;
+
     min-height: 350px;
+
     max-height: 500px;
+
     overflow-y: auto;
 }
 
 .chat-message {
     background: #334155;
+
     border-radius: 10px;
+
     padding: 11px 14px;
+
     margin: 9px 0;
+
     word-wrap: break-word;
 }
 
+
+/* ================= INPUT ================= */
+
 .input-area {
     display: flex;
+
     gap: 8px;
+
     margin-top: 12px;
 }
 
 #messageInput {
     flex: 1;
+
     padding: 13px;
+
     border: none;
+
     border-radius: 9px;
+
     font-size: 16px;
+
     outline: none;
 }
 
 #sendButton {
     padding: 13px 20px;
+
     border: none;
+
     border-radius: 9px;
+
     background: #2563eb;
+
     color: white;
+
     font-weight: bold;
+
     cursor: pointer;
 }
+
+
+/* ================= PASSWORD BOX ================= */
 
 #passwordBox {
     display: none;
+
     background: #1e293b;
+
     border-radius: 14px;
+
     padding: 25px;
+
     text-align: center;
+
     margin-top: 20px;
 }
 
+
+/* PASSWORD WRAPPER */
+
 .password-wrapper {
     position: relative;
+
     width: 100%;
-    max-width: 300px;
-    margin: 12px auto;
+
+    max-width: 320px;
+
+    margin: 15px auto;
 }
+
+
+/* PASSWORD INPUT */
 
 #passwordInput {
     width: 100%;
-    padding: 13px 48px 13px 13px;
+
+    height: 48px;
+
+    padding: 12px 50px 12px 14px;
+
     border: none;
-    border-radius: 8px;
+
+    border-radius: 9px;
+
     font-size: 16px;
+
     outline: none;
+
+    background: white;
+
+    color: black;
 }
+
+
+/* EYE BUTTON */
 
 #eyeButton {
     position: absolute;
-    right: 5px;
+
+    right: 4px;
+
     top: 4px;
-    height: 42px;
-    width: 42px;
+
+    width: 40px;
+
+    height: 40px;
+
+    padding: 0;
+
     border: none;
+
     background: transparent;
-    cursor: pointer;
+
+    color: black;
+
     font-size: 21px;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 }
 
+
+/* UNLOCK */
+
 #unlockButton {
-    padding: 13px 18px;
+    padding: 13px 22px;
+
     border: none;
+
     border-radius: 8px;
+
     background: #2563eb;
+
     color: white;
+
     font-weight: bold;
+
     cursor: pointer;
 }
+
+
+/* ================= USERNAME POPUP ================= */
 
 #usernameBox {
     display: none;
+
     position: fixed;
+
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
+
+    background: rgba(0, 0, 0, 0.85);
+
     align-items: center;
+
     justify-content: center;
+
     z-index: 999;
 }
 
 .username-card {
     width: 90%;
+
     max-width: 360px;
+
     background: #1e293b;
+
     border-radius: 15px;
+
     padding: 25px;
+
     text-align: center;
 }
 
 #usernameInput {
     width: 100%;
+
     padding: 13px;
+
     border: none;
+
     border-radius: 8px;
+
     font-size: 16px;
+
     outline: none;
+
     margin: 12px 0;
 }
 
 #usernameButton {
     width: 100%;
+
     padding: 13px;
+
     border: none;
+
     border-radius: 8px;
+
     background: #2563eb;
+
     color: white;
+
     font-weight: bold;
+
     cursor: pointer;
 }
 
+
+/* ================= CURRENT USER ================= */
+
 #currentUser {
     text-align: center;
+
     color: #94a3b8;
+
     margin-bottom: 12px;
+
     font-size: 14px;
 }
 
+
+/* ================= FOOTER ================= */
+
 footer {
     text-align: center;
+
     padding: 30px;
+
     color: #94a3b8;
 }
+
+
+/* ================= MOBILE ================= */
 
 @media (max-width: 500px) {
 
@@ -244,17 +413,19 @@ footer {
         width: 100%;
     }
 
-    #unlockButton {
-        width: 100%;
-        margin-top: 5px;
-    }
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- USERNAME POPUP -->
+
+<!-- ==========================================
+     USERNAME POPUP
+========================================== -->
 
 <div id="usernameBox">
 
@@ -284,11 +455,14 @@ footer {
 </div>
 
 
-<!-- HEADER -->
+<!-- ==========================================
+     HEADER
+========================================== -->
 
 <div class="header">
 
     <h2>💬 Chat</h2>
+
 
     <div class="menu">
 
@@ -300,25 +474,39 @@ footer {
 
         </button>
 
+
         <div
             class="dropdown"
             id="menuBox">
 
+
             <button onclick="letterSensitive()">
+
                 1. Letter Sensitive
+
             </button>
+
 
             <button onclick="emojiSensitive()">
+
                 2. Emoji Sensitive
+
             </button>
+
 
             <button onclick="wordSensitive()">
+
                 3. Word Sensitive
+
             </button>
 
+
             <button onclick="changeUsername()">
+
                 4. Change Username
+
             </button>
+
 
         </div>
 
@@ -327,22 +515,33 @@ footer {
 </div>
 
 
+<!-- ==========================================
+     MAIN
+========================================== -->
+
 <div class="chat-container">
 
-    <!-- LOCK -->
+
+    <!-- LOCKED -->
 
     <div
         class="locked-box"
         id="lockedBox">
 
         🔒 Chat Locked
+
         <br>
-        <small>Use Word Sensitive to unlock</small>
+
+        <small>
+            Use Word Sensitive to unlock
+        </small>
 
     </div>
 
 
-    <!-- PASSWORD -->
+    <!-- ======================================
+         PASSWORD
+    ======================================= -->
 
     <div id="passwordBox">
 
@@ -350,7 +549,9 @@ footer {
 
         <p>Enter password</p>
 
+
         <div class="password-wrapper">
+
 
             <input
                 type="password"
@@ -358,16 +559,19 @@ footer {
                 placeholder="Password"
                 autocomplete="off">
 
+
             <button
                 id="eyeButton"
-                onclick="togglePassword()"
-                type="button">
+                type="button"
+                onclick="togglePassword()">
 
                 👁️
 
             </button>
 
+
         </div>
+
 
         <button
             id="unlockButton"
@@ -377,21 +581,28 @@ footer {
 
         </button>
 
+
     </div>
 
 
-    <!-- CHAT -->
+    <!-- ======================================
+         CHAT
+    ======================================= -->
 
     <div id="chatArea">
 
+
         <div id="currentUser"></div>
+
 
         <div
             class="chat-window"
             id="chatWindow">
 
             <div class="chat-message">
+
                 Loading messages...
+
             </div>
 
         </div>
@@ -399,11 +610,13 @@ footer {
 
         <div class="input-area">
 
+
             <input
                 type="text"
                 id="messageInput"
                 placeholder="Type a message..."
                 autocomplete="off">
+
 
             <button
                 id="sendButton"
@@ -413,22 +626,40 @@ footer {
 
             </button>
 
+
         </div>
 
+
     </div>
+
 
 </div>
 
 
 <footer>
+
     💬 Chat
+
 </footer>
 
 
+<!-- ==========================================
+     FIREBASE SCRIPT
+========================================== -->
+
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+/* ==========================================
+   FIREBASE IMPORT
+========================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
 
 import {
     getFirestore,
@@ -441,26 +672,33 @@ import {
     onSnapshot,
     serverTimestamp
 }
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
 /* ==========================================
-   FIREBASE
+   FIREBASE CONFIG
 ========================================== */
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyCpbvdIcj6-97RhFZZHO188ZaE_DeMia7M",
+    apiKey:
+    "AIzaSyCpbvdIcj6-97RhFZZHO188ZaE_DeMia7M",
 
-    authDomain: "top-20-games.firebaseapp.com",
+    authDomain:
+    "top-20-games.firebaseapp.com",
 
-    projectId: "top-20-games",
+    projectId:
+    "top-20-games",
 
-    storageBucket: "top-20-games.firebasestorage.app",
+    storageBucket:
+    "top-20-games.firebasestorage.app",
 
-    messagingSenderId: "635285760659",
+    messagingSenderId:
+    "635285760659",
 
-    appId: "1:635285760659:web:88eeb84967029ef2017b66"
+    appId:
+    "1:635285760659:web:88eeb84967029ef2017b66"
 
 };
 
@@ -468,12 +706,13 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
+
 const db =
     getFirestore(app);
 
 
 /* ==========================================
-   CURRENT USER
+   VARIABLES
 ========================================== */
 
 let userId = null;
@@ -490,19 +729,24 @@ let unsubscribeMessages = null;
 function createUserId() {
 
     return (
+
         "user_" +
+
         Date.now() +
+
         "_" +
+
         Math.random()
             .toString(36)
             .substring(2, 10)
+
     );
 
 }
 
 
 /* ==========================================
-   SHOW USERNAME
+   USERNAME POPUP
 ========================================== */
 
 function showUsernameBox() {
@@ -511,9 +755,22 @@ function showUsernameBox() {
         "usernameBox"
     ).style.display = "flex";
 
+
     document.getElementById(
         "usernameInput"
     ).value = "";
+
+
+    setTimeout(
+        function () {
+
+            document.getElementById(
+                "usernameInput"
+            ).focus();
+
+        },
+        100
+    );
 
 }
 
@@ -522,18 +779,23 @@ function showUsernameBox() {
    SELECT USERNAME
 ========================================== */
 
-window.selectUsername = async function () {
+window.selectUsername =
+async function () {
+
 
     const input =
         document.getElementById(
             "usernameInput"
         );
 
+
     const enteredName =
         input.value.trim();
 
 
-    if (enteredName === "") {
+    if (
+        enteredName === ""
+    ) {
 
         alert(
             "Please enter a username."
@@ -544,7 +806,9 @@ window.selectUsername = async function () {
     }
 
 
-    if (enteredName.length < 2) {
+    if (
+        enteredName.length < 2
+    ) {
 
         alert(
             "Username must be at least 2 characters."
@@ -561,9 +825,8 @@ window.selectUsername = async function () {
 
     try {
 
-        /*
-          Find existing username.
-        */
+
+        /* FIND EXISTING USER */
 
         const userQuery =
             query(
@@ -583,15 +846,15 @@ window.selectUsername = async function () {
 
 
         const userSnapshot =
-            await getDocs(userQuery);
+            await getDocs(
+                userQuery
+            );
 
 
-        if (!userSnapshot.empty) {
+        if (
+            !userSnapshot.empty
+        ) {
 
-            /*
-              Existing username:
-              use same userId.
-            */
 
             const existingUser =
                 userSnapshot.docs[0].data();
@@ -604,11 +867,11 @@ window.selectUsername = async function () {
             username =
                 existingUser.username;
 
+
         } else {
 
-            /*
-              New username.
-            */
+
+            /* CREATE NEW USER */
 
             userId =
                 createUserId();
@@ -646,14 +909,14 @@ window.selectUsername = async function () {
         }
 
 
+        /* CLOSE POPUP */
+
         document.getElementById(
             "usernameBox"
         ).style.display = "none";
 
 
-        /*
-          Username does NOT unlock chat.
-        */
+        /* LOCK CHAT */
 
         document.getElementById(
             "lockedBox"
@@ -670,7 +933,11 @@ window.selectUsername = async function () {
         ).style.display = "none";
 
 
-    } catch (error) {
+    }
+
+
+    catch (error) {
+
 
         console.error(
             "Username error:",
@@ -679,7 +946,7 @@ window.selectUsername = async function () {
 
 
         alert(
-            "❌ Could not set username."
+            "❌ Could not set username. Check Firebase Rules."
         );
 
     }
@@ -691,7 +958,9 @@ window.selectUsername = async function () {
    MENU
 ========================================== */
 
-window.toggleMenu = function () {
+window.toggleMenu =
+function () {
+
 
     const menu =
         document.getElementById(
@@ -705,7 +974,9 @@ window.toggleMenu = function () {
 
         menu.style.display = "none";
 
-    } else {
+    }
+
+    else {
 
         menu.style.display = "block";
 
@@ -715,10 +986,38 @@ window.toggleMenu = function () {
 
 
 /* ==========================================
+   LETTER
+========================================== */
+
+window.letterSensitive =
+function () {
+
+    window.location.href =
+        "index.html";
+
+};
+
+
+/* ==========================================
+   EMOJI
+========================================== */
+
+window.emojiSensitive =
+function () {
+
+    window.location.href =
+        "index.html";
+
+};
+
+
+/* ==========================================
    WORD SENSITIVE
 ========================================== */
 
-window.wordSensitive = function () {
+window.wordSensitive =
+function () {
+
 
     document.getElementById(
         "menuBox"
@@ -765,12 +1064,15 @@ window.wordSensitive = function () {
    SHOW / HIDE PASSWORD
 ========================================== */
 
-window.togglePassword = function () {
+window.togglePassword =
+function () {
+
 
     const input =
         document.getElementById(
             "passwordInput"
         );
+
 
     const eye =
         document.getElementById(
@@ -782,15 +1084,25 @@ window.togglePassword = function () {
         input.type === "password"
     ) {
 
+
         input.type = "text";
 
-        eye.textContent = "🙈";
 
-    } else {
+        eye.textContent =
+            "🙈";
 
-        input.type = "password";
 
-        eye.textContent = "👁️";
+    }
+
+    else {
+
+
+        input.type =
+            "password";
+
+
+        eye.textContent =
+            "👁️";
 
     }
 
@@ -801,7 +1113,9 @@ window.togglePassword = function () {
    UNLOCK
 ========================================== */
 
-window.unlockChat = function () {
+window.unlockChat =
+function () {
+
 
     const password =
         document.getElementById(
@@ -809,14 +1123,12 @@ window.unlockChat = function () {
         ).value;
 
 
-    /*
-      NEW PASSWORD:
-      Varad@1234
-    */
+    /* PASSWORD */
 
     if (
         password === "Varad@1234"
     ) {
+
 
         document.getElementById(
             "passwordBox"
@@ -848,7 +1160,10 @@ window.unlockChat = function () {
         ).focus();
 
 
-    } else {
+    }
+
+    else {
+
 
         alert(
             "❌ Incorrect password"
@@ -860,12 +1175,15 @@ window.unlockChat = function () {
 
 
 /* ==========================================
-   START CHAT
+   START SHARED CHAT
 ========================================== */
 
 function startChat() {
 
-    if (unsubscribeMessages) {
+
+    if (
+        unsubscribeMessages
+    ) {
 
         unsubscribeMessages();
 
@@ -873,13 +1191,8 @@ function startChat() {
 
 
     /*
-      IMPORTANT:
-      Only messages belonging to
-      the current username/userId
-      are loaded.
-
-      For a simple one-to-one style demo,
-      messages are linked by userId.
+      ALL USERS SEE THE SAME CHAT.
+      Sender name comes from senderName.
     */
 
     const messagesQuery =
@@ -888,12 +1201,6 @@ function startChat() {
             collection(
                 db,
                 "messages"
-            ),
-
-            where(
-                "ownerId",
-                "==",
-                userId
             ),
 
             orderBy(
@@ -909,7 +1216,9 @@ function startChat() {
 
             messagesQuery,
 
-            (snapshot) => {
+
+            function (snapshot) {
+
 
                 const chat =
                     document.getElementById(
@@ -921,60 +1230,71 @@ function startChat() {
 
 
                 snapshot.forEach(
-                    (doc) => {
+                    function (doc) {
+
 
                         const data =
                             doc.data();
 
 
-                        const newMessage =
+                        const message =
                             document.createElement(
                                 "div"
                             );
 
 
-                        newMessage.className =
+                        message.className =
                             "chat-message";
 
 
-                        let senderName;
+                        /*
+                          If senderId matches
+                          current user:
+                          show You.
 
+                          Otherwise show
+                          their username.
+                        */
 
                         if (
                             data.senderId ===
                             userId
                         ) {
 
-                            senderName =
-                                "👤 You";
 
-                        } else {
+                            message.textContent =
+                                "👤 You: " +
+                                (
+                                    data.message ||
+                                    ""
+                                );
 
-                            senderName =
+
+                        }
+
+                        else {
+
+
+                            message.textContent =
                                 "👤 " +
                                 (
                                     data.senderName ||
                                     "Sender"
+                                ) +
+                                ": " +
+                                (
+                                    data.message ||
+                                    ""
                                 );
 
                         }
 
 
-                        newMessage.textContent =
-                            senderName +
-                            ": " +
-                            (
-                                data.message ||
-                                ""
-                            );
-
-
                         chat.appendChild(
-                            newMessage
+                            message
                         );
 
                     }
-
                 );
 
 
@@ -983,10 +1303,12 @@ function startChat() {
 
             },
 
-            (error) => {
+
+            function (error) {
+
 
                 console.error(
-                    "Firestore read error:",
+                    "Read error:",
                     error
                 );
 
@@ -1007,7 +1329,9 @@ function startChat() {
    SEND MESSAGE
 ========================================== */
 
-window.sendMessage = async function () {
+window.sendMessage =
+async function () {
+
 
     const input =
         document.getElementById(
@@ -1019,17 +1343,22 @@ window.sendMessage = async function () {
         input.value.trim();
 
 
-    if (message === "") {
+    if (
+        message === ""
+    ) {
 
         return;
 
     }
 
 
-    if (!userId || !username) {
+    if (
+        !userId ||
+        !username
+    ) {
 
         alert(
-            "Please enter username first."
+            "Please select username first."
         );
 
         return;
@@ -1039,6 +1368,7 @@ window.sendMessage = async function () {
 
     try {
 
+
         await addDoc(
 
             collection(
@@ -1047,14 +1377,6 @@ window.sendMessage = async function () {
             ),
 
             {
-
-                /*
-                  ownerId groups the
-                  messages by username.
-                */
-
-                ownerId:
-                    userId,
 
                 senderId:
                     userId,
@@ -1075,10 +1397,14 @@ window.sendMessage = async function () {
 
         input.value = "";
 
+
         input.focus();
 
 
-    } catch (error) {
+    }
+
+    catch (error) {
+
 
         console.error(
             "Send error:",
@@ -1099,20 +1425,30 @@ window.sendMessage = async function () {
    CHANGE USERNAME
 ========================================== */
 
-window.changeUsername = function () {
+window.changeUsername =
+function () {
+
 
     document.getElementById(
         "menuBox"
     ).style.display = "none";
 
 
-    if (unsubscribeMessages) {
+    if (
+        unsubscribeMessages
+    ) {
 
         unsubscribeMessages();
 
-        unsubscribeMessages = null;
+        unsubscribeMessages =
+            null;
 
     }
+
+
+    userId = null;
+
+    username = null;
 
 
     document.getElementById(
@@ -1130,38 +1466,13 @@ window.changeUsername = function () {
     ).style.display = "block";
 
 
-    userId = null;
-
-    username = null;
-
-
     showUsernameBox();
 
 };
 
 
 /* ==========================================
-   OTHER MENU OPTIONS
-========================================== */
-
-window.letterSensitive = function () {
-
-    window.location.href =
-        "index.html";
-
-};
-
-
-window.emojiSensitive = function () {
-
-    window.location.href =
-        "index.html";
-
-};
-
-
-/* ==========================================
-   ENTER KEY
+   ENTER KEY - USERNAME
 ========================================== */
 
 document
@@ -1184,6 +1495,10 @@ document
     );
 
 
+/* ==========================================
+   ENTER KEY - PASSWORD
+========================================== */
+
 document
     .getElementById(
         "passwordInput"
@@ -1203,6 +1518,10 @@ document
         }
     );
 
+
+/* ==========================================
+   ENTER KEY - MESSAGE
+========================================== */
 
 document
     .getElementById(
@@ -1225,13 +1544,15 @@ document
 
 
 /* ==========================================
-   EVERY PAGE OPEN ASKS USERNAME
+   ALWAYS ASK USERNAME ON PAGE LOAD
 ========================================== */
 
 showUsernameBox();
 
+
 </script>
 
 </body>
+
 </html>
 ```
