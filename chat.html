@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Chat</title>
 
 <style>
@@ -85,7 +85,6 @@ body {
     border-radius: 14px;
     padding: 18px;
     text-align: center;
-    margin-bottom: 15px;
 }
 
 #chatArea {
@@ -170,7 +169,6 @@ footer {
 }
 
 @media (max-width: 500px) {
-
     .input-area {
         flex-direction: column;
     }
@@ -192,10 +190,7 @@ footer {
 </style>
 </head>
 
-
 <body>
-
-<!-- HEADER -->
 
 <div class="header">
 
@@ -238,30 +233,20 @@ footer {
 
 <div class="chat-container">
 
-    <!-- LOCKED CHAT -->
-
     <div
         class="locked-box"
         id="lockedBox">
 
         🔒 Chat Locked
 
-        <br><br>
-
-        Use the ⋮ menu and select
-        <b>Word Sensitive</b>
-        to unlock the chat.
-
     </div>
 
-
-    <!-- PASSWORD -->
 
     <div id="passwordBox">
 
         <h3>🔐 Word Sensitive</h3>
 
-        <p>Enter password to unlock chat</p>
+        <p>Enter password</p>
 
         <input
             type="password"
@@ -279,15 +264,11 @@ footer {
     </div>
 
 
-    <!-- CHAT -->
-
     <div id="chatArea">
 
         <div
             class="chat-window"
             id="chatWindow">
-
-            <!-- OLD CHATS -->
 
             <div class="chat-message">
                 👤 Friend: Hey!
@@ -307,8 +288,6 @@ footer {
 
         </div>
 
-
-        <!-- TYPING AREA -->
 
         <div class="input-area">
 
@@ -333,13 +312,11 @@ footer {
 
 
 <footer>
-    💬 Chat Demo
+    💬 Chat
 </footer>
 
 
 <script>
-
-/* THREE DOTS */
 
 function toggleMenu() {
 
@@ -347,18 +324,14 @@ function toggleMenu() {
         document.getElementById("menuBox");
 
     if (menu.style.display === "block") {
-
         menu.style.display = "none";
-
     } else {
-
         menu.style.display = "block";
-
     }
 }
 
 
-/* 1. LETTER SENSITIVE */
+/* 1. Letter Sensitive → Home */
 
 function letterSensitive() {
 
@@ -367,7 +340,7 @@ function letterSensitive() {
 }
 
 
-/* 2. EMOJI SENSITIVE */
+/* 2. Emoji Sensitive → Home */
 
 function emojiSensitive() {
 
@@ -376,7 +349,7 @@ function emojiSensitive() {
 }
 
 
-/* 3. WORD SENSITIVE */
+/* 3. Word Sensitive → Password */
 
 function wordSensitive() {
 
@@ -384,19 +357,21 @@ function wordSensitive() {
 
     document.getElementById("passwordBox").style.display = "block";
 
+    document.getElementById("passwordInput").value = "";
+
     document.getElementById("passwordInput").focus();
 
 }
 
 
-/* PASSWORD */
+/* Word Sensitive Password */
 
 function unlockChat() {
 
     const password =
         document.getElementById("passwordInput").value;
 
-    if (password === "patil@1234") {
+    if (password === "Varuu@1234") {
 
         document.getElementById("passwordBox").style.display = "none";
 
@@ -415,7 +390,7 @@ function unlockChat() {
 }
 
 
-/* SEND */
+/* Send message */
 
 function sendMessage() {
 
@@ -435,8 +410,7 @@ function sendMessage() {
     const newMessage =
         document.createElement("div");
 
-    newMessage.className =
-        "chat-message";
+    newMessage.className = "chat-message";
 
     newMessage.textContent =
         "👤 You: " + message;
@@ -450,25 +424,20 @@ function sendMessage() {
 }
 
 
-/* ENTER KEY */
+/* Enter key sends message */
 
 document
     .getElementById("messageInput")
-    .addEventListener(
-        "keydown",
-        function(event) {
+    .addEventListener("keydown", function(event) {
 
-            if (event.key === "Enter") {
-
-                sendMessage();
-
-            }
-
+        if (event.key === "Enter") {
+            sendMessage();
         }
-    );
+
+    });
 
 
-/* 4. OPEN PAGE */
+/* 4. Open Page */
 
 function openPage() {
 
